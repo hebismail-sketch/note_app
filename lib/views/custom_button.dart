@@ -1,32 +1,65 @@
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, this.onTap, this.isLoading = false});
+  const CustomButton({
+    super.key,
+    this.onTap,
+    this.isLoading = false,
+  });
 
-  final void Function()? onTap;
+  final VoidCallback? onTap;
   final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: 55,
-        decoration: BoxDecoration(
-            color: Colors.amberAccent, borderRadius: BorderRadius.circular(8)),
-        child: Center(
-            child: isLoading
-                ? SizedBox(height: 24,
-                    width: 24,
-                    child: const CircularProgressIndicator(color: Colors.white))
-                : const Text(
-                    'save',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
-                  )),
+    final bool isDark =
+        Theme.of(context).brightness == Brightness.dark;
+
+    return SizedBox(
+      width: double.infinity,
+      height: 58,
+      child: ElevatedButton(
+        onPressed: isLoading ? null : onTap,
+
+        style: ElevatedButton.styleFrom(
+          backgroundColor: isDark
+              ? const Color(0xffE2CEA3)
+              : const Color(0xff2B2B2B),
+
+          foregroundColor: isDark
+              ? Colors.black
+              : Colors.white,
+
+          elevation: 0,
+
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+          ),
+        ),
+
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 250),
+
+          child: isLoading
+              ? const SizedBox(
+            key: ValueKey("loading"),
+            height: 24,
+            width: 24,
+            child: CircularProgressIndicator(
+              strokeWidth: 2.5,
+              color: Colors.white,
+            ),
+          )
+              : const Text(
+            "Save Note",
+            key: ValueKey("text"),
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              letterSpacing: .5,
+            ),
+          ),
+        ),
       ),
     );
   }

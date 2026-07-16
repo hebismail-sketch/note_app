@@ -16,12 +16,17 @@ class _ColorsListViewState extends State<ColorsListView> {
   int currentIndex = 0;
 
   List<Color> colors = const [
-    Color(0xffD8684C),
-    Color(0xffCE6A53),
-    Color(0xffC34934),
-    Color(0xffA47574),
-    Color(0xff9F7678),
-    Color(0xffC24C68),
+    Color(0xFF7CC6FF),
+    Color(0xFF5D8BFF),
+    Color(0xFFFFC46B),
+    Color(0xFFFF9E43),
+    Color(0xFFFF6FA3),
+    Color(0xFFE94D8A),
+    Color(0xFF9F44FF),
+    Color(0xFF49CDBE),
+    Color(0xFF65F0E2),
+    Color(0xFF7F7BFF),
+
   ];
 
   @override
@@ -36,7 +41,7 @@ class _ColorsListViewState extends State<ColorsListView> {
                 padding: const EdgeInsets.symmetric(horizontal: 6),
                 child: GestureDetector(
                     onTap: () {
-                      currentIndex == index;
+                      currentIndex = index;
                       BlocProvider.of
                       <NoteCubit>(context).color = colors[index];
                       setState(() {});
