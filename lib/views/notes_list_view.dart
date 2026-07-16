@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_app/models/note_model.dart';
-import 'package:note_app/note_item.dart';
-
+import 'package:note_app/widget/note_item.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../add_note_cubit/notes_cubit.dart';
 
 class NotesListView extends StatelessWidget {
@@ -12,20 +12,22 @@ class NotesListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<NotesCubit, NotesState>(
       builder: (context, state) {
-        List<NoteModel> notes = BlocProvider
-            .of<NotesCubit>(context)
-            .notes = null??[];
+        List<NoteModel> notes =
+            BlocProvider.of<NotesCubit>(context).notes ?? [];
 
         return Padding(
-          padding:  EdgeInsets.symmetric(vertical: 16),
-          child: ListView.builder(
+          padding: EdgeInsets.symmetric(vertical: 16),
+          child: MasonryGridView.builder(
             padding: EdgeInsets.zero,
+            gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
+            mainAxisSpacing: 16,
+            crossAxisSpacing: 16,
             itemCount: notes.length,
+
             itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: NoteItem(note:notes[index], ),
-              );
+              return NoteItem(note: notes[index]);
             },
           ),
         );
