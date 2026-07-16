@@ -9,9 +9,11 @@ class NoteModel extends HiveObject{
   @HiveField(2)
   final String date;
   @HiveField(3)
-  late final int color;
+  int color;
+  @HiveField(4)
+  String? imagePath;
 
   NoteModel({required this.title, required this.subTitle,
     required this.date,
-      required this.color,});
+      required this.color,required this.imagePath});
 }
