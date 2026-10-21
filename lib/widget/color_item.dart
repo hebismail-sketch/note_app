@@ -10,7 +10,7 @@ final Color color;
       radius: 38,
       backgroundColor: color,
       child: CircleAvatar(
-          backgroundColor:Colors.blue,
+          backgroundColor:Colors.white,
           radius: 33, )):
        CircleAvatar(
         backgroundColor:color,

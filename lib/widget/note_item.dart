@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_app/views/edit_note_view.dart';
 import 'dart:io';
-import '../add_note_cubit/notes_cubit.dart';
 import '../models/note_model.dart';
 
 class NoteItem extends StatelessWidget {
@@ -57,35 +55,14 @@ class NoteItem extends StatelessWidget {
 
               child: Text(
                 note.title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
               ),
-            ),
-            const SizedBox(height: 12),
-            Text(note.subTitle, maxLines: 8, overflow: TextOverflow.ellipsis),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  padding: EdgeInsets.zero,
-                  onPressed: () {
-                    note.delete();
-                    BlocProvider.of<NotesCubit>(context).fetchAllNotes();
-                  },
-                  icon: Icon(
-                    Icons.delete_outlined,
-                    size: 20,
-                    color: Colors.black,
-                  ),
-                ),
-                Text(
-                  note.date,
-                  style: TextStyle(fontSize: 15, color: Colors.black87),
-                ),
-              ],
             ),
           ],
         ),
